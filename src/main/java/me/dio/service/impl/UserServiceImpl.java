@@ -6,6 +6,7 @@ import me.dio.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,5 +28,11 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("This Account number already exists.");
         }
         return userRepository.save(userToCreate);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<User> userExist = userRepository.findById(id);
+        userExist.ifPresent(userRepository::delete);
     }
 }
