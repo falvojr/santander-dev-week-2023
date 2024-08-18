@@ -28,4 +28,25 @@ public class UserServiceImpl implements UserService {
         }
         return userRepository.save(userToCreate);
     }
+
+    @Override
+    public boolean delete(Long id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            throw new NoSuchElementException("No users found");
+        }
+        return users;
+    }
+
+
+
 }
