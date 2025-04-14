@@ -1,5 +1,5 @@
 package me.dio.service.impl;
-
+import java.util.List;
 import me.dio.domain.model.User;
 import me.dio.domain.repository.UserRepository;
 import me.dio.service.UserService;
@@ -28,4 +28,12 @@ public class UserServiceImpl implements UserService {
         }
         return userRepository.save(userToCreate);
     }
+    public void deletar (Long id ){
+        findById(id);
+        repository.deleteById(id);
+    }
+    public List<User> findAll() {
+        return repository.findAll();
+    }
 }
+
