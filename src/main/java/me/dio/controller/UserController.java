@@ -33,4 +33,28 @@ public class UserController {
                 .toUri();
         return ResponseEntity.created(location).body(userCreated);
     }
+
+    @GetMapping
+    public ResponseEntity<List<User>> findAll() {
+        List<User> users = userService.findAll();
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> findByName(@RequestParam String name) {
+        List<User> users = userService.findByName(name);
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/search/account")
+    public ResponseEntity<User> findByAccountNumber(@RequestParam String accountNumber) {
+        User user = userService.findByAccountNumber(accountNumber);
+        return ResponseEntity.ok(user);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User userToUpdate) {
+        User userUpdated = userService.update(id, userToUpdate);
+        return ResponseEntity.ok(userUpdated);
+    }
 }
