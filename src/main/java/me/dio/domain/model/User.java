@@ -2,75 +2,55 @@ package me.dio.domain.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
-@Entity(name = "tb_user")
+@Entity
+@Table(name = "tb_users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
+	@Column(nullable = false, unique = true, length = 100)
+	private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Account account;
+	@Column(nullable = false, length = 100)
+	private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Card card;
+	@Column(length = 20)
+	private String phone;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Feature> features;
+	public User() {}
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<News> news;
+	public Long getId() {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Account getAccount() {
-        return account;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    public List<Feature> getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(List<Feature> features) {
-        this.features = features;
-    }
-
-    public List<News> getNews() {
-        return news;
-    }
-
-    public void setNews(List<News> news) {
-        this.news = news;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 }
